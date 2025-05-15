@@ -4,22 +4,23 @@ import {
   Text
 } from 'react-native';
 import { globalStyles } from '@/styles/global-styles';
+import { CustomText } from '@/components/CustomText';
 
 
 const CalculatorApp = () => {
   return (
     <View style={ globalStyles.calculatorContainer }>
-      <Text
-        style={ globalStyles.mainResult }
-        numberOfLines={ 1 }
-        adjustsFontSizeToFit
+      <CustomText
+        variant='h1'
       >
         50 x 50
-      </Text>
+      </CustomText>
 
-      <Text style={ globalStyles.subResult }>
+      <CustomText
+        variant='h2'
+      >
         2500
-      </Text>
+      </CustomText>
     </View>
   );
 }
