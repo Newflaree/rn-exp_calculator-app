@@ -3,19 +3,22 @@ import {
   View,
   Text
 } from 'react-native';
+import { globalStyles } from '@/styles/global-styles';
 
 
 const CalculatorApp = () => {
   return (
-    <View>
+    <View style={ globalStyles.calculatorContainer }>
       <Text
-        style={{
-          fontSize: 50,
-          fontFamily: 'SpaceMono',
-          color: 'white'
-        }}
+        style={ globalStyles.mainResult }
+        numberOfLines={ 1 }
+        adjustsFontSizeToFit
       >
-        CalculatorApp
+        50 x 50
+      </Text>
+
+      <Text style={ globalStyles.subResult }>
+        2500
       </Text>
     </View>
   );
