@@ -134,8 +134,8 @@ const CalculatorApp = () => {
         />
 
         <CalculatorButton
-          label='+'
           color={ Colors.orange }
+          label='='
           onPress={() => console.log( '+' )}
         />
       </View>
