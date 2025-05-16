@@ -10,10 +10,15 @@ import { useCalculator } from '@/hooks/useCalculator';
 const CalculatorApp = () => {
   const {
     buildNumber,
+    prevNumber,
     clean,
     formula,
     deleteLast,
-    toggleSign
+    toggleSign,
+    divideOperation,
+    multiplyOperation,
+    subtractOperation,
+    addOperation,
   } = useCalculator();
 
   return (
@@ -25,11 +30,13 @@ const CalculatorApp = () => {
           { formula }
         </CustomText>
 
-        <CustomText
-          variant='h2'
-        >
-          2500
-        </CustomText>
+        {
+          formula === prevNumber ? (
+            <CustomText variant='h2'> </CustomText>
+          ) : (
+            <CustomText variant='h2'>{ prevNumber }</CustomText>
+          )
+        }
       </View>
 
       <View style={ globalStyles.row }>
@@ -57,7 +64,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label='/'
           color={ Colors.orange }
-          onPress={() => console.log( '/' )}
+          onPress={() => divideOperation()}
         />
       </View>
 
@@ -80,7 +87,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label='X'
           color={ Colors.orange }
-          onPress={() => console.log( 'X' )}
+          onPress={() => multiplyOperation()}
         />
       </View>
 
@@ -103,7 +110,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label='-'
           color={ Colors.orange }
-          onPress={() => console.log( '-' )}
+          onPress={() => subtractOperation()}
         />
       </View>
 
@@ -126,7 +133,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label='+'
           color={ Colors.orange }
-          onPress={() => console.log( '+' )}
+          onPress={() => addOperation()}
         />
       </View>
 
