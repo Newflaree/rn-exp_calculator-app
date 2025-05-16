@@ -30,7 +30,9 @@ export const useCalculator = () => {
 
   useEffect( () => {
     //setFormula( number );
-  }, [ number ] );
+    const subResult = calculateSubResult();
+    setPrevNumber( `${ subResult }` );
+  }, [ formula ] );
 
   const clean = () => {
     setNumber( '0' );
@@ -63,6 +65,8 @@ export const useCalculator = () => {
   }
 
   const setLastNumber = () => {
+    calculateResult();
+
     if ( number.endsWith('.') )
       setPrevNumber( number.slice( 0, -1 ) );
 
@@ -88,6 +92,40 @@ export const useCalculator = () => {
   const addOperation = () => {
     setLastNumber();
     lastOperation.current = Operator.add;
+  }
+
+  const calculateSubResult = () => {
+    const [ firstValue, operation, secondValue ] = formula.split(' ');
+
+    const num1 = Number( firstValue );
+    const num2 = Number( secondValue );
+
+    if ( isNaN( num2 ) ) return num1;
+
+    switch ( operation ) {
+      case Operator.add:
+        return num1 + num2;
+    
+      case Operator.subtract:
+        return num1 - num2;
+    
+      case Operator.multiply:
+        return num1 * num2;
+
+      case Operator.divide:
+        return num1 / num2;
+
+      default:
+        throw new Error( `Operation ${ operation } not implemented` );
+    }
+  }
+
+  const calculateResult = () => {
+    const result = calculateSubResult();
+    setFormula( `${ result }` );
+
+    lastOperation.current = undefined;
+    setPrevNumber( '0' );
   }
 
   const buildNumber = ( numberString: string ) => {
@@ -129,5 +167,7 @@ export const useCalculator = () => {
     multiplyOperation,
     subtractOperation,
     addOperation,
+    calculateSubResult,
+    calculateResult
   }
 }
